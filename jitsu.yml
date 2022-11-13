@@ -1,0 +1,104 @@
+namespace: monk-jitsu
+
+jitsu-common:
+  metadata:
+    defines: metadata
+    name: Jitsu
+    description: Jitsu is an open-source data integration platform. Our mission is to ensure that all your business data is consolidated in a single database and ready for analytics.
+    website: https://jitsu.com/
+    publisher: monk.io
+    icon: https://jitsu.com/img/jitsu-responsive.svg
+  variables:
+    redis_host:
+      type: string
+      value: <- get-hostname("monk-jitsu/redis", "redis") split(".dns.podman") join("")
+    redis_host_user_recognition:
+      type: string
+      value: <- get-hostname("monk-jitsu/redis-user-recognition", "redis") split(".dns.podman") join("")
+    jitsu_server_host:
+      type: string
+      value: <- get-hostname("monk-jitsu/jitsu-server", "server") split(".dns.podman") join("")
+    jitsu_configurator_host:
+      type: string
+      value: <- get-hostname("monk-jitsu/jitsu-configurator", "configurator") split(".dns.podman") join("")
+    jitsu_redis_url:
+      env: REDIS_URL
+      type: string
+      value: <- `redis://${redis_host}:6379`
+    jitsu_backend_api_base:
+      env: BACKEND_API_BASE
+      type: string
+      value: <- `redis://${redis_host}:6379`
+    jitsu_user_recognition:
+      env: USER_RECOGNITION_ENABLED
+      type: bool
+      value: true
+    jitsu_user_recognition_redis:
+      env: REDIS_URL
+      type: string
+      value: <- `redis://${redis_host_user_recognition}:6379`
+    jitsu_term:
+      env: TERM
+      type: string
+      value: xterm-256color
+    jitsu_cluster_token:
+      env: CLUSTER_ADMIN_TOKEN
+      type: string
+      value: <- `${jitsu_admin_token}`
+    jitsu_server_url:
+      env: JITSU_SERVER_URL
+      type: string
+      value: <- `http://${jitsu_server_host}:${jitsu_config_port}/`
+    jitsu_configuration_url:
+      env: JITSU_CONFIGURATOR_URL
+      type: string
+      value: <- `http://${jitsu_configurator_host}:${jitsu_server_port}/`
+    volume_local:
+      type: string
+      value: <- `${monk-volume-path}/jitsu`
+
+
+jitsu-configurator:
+  inherits: ./jitsu-common
+  defines: runnable
+  containers:
+    configurator:
+      image: jitsucom/configurator
+      ports:
+        - <- `0.0.0.0:8001:7000`
+      paths:
+        - <- `${volume_local}/configurator/data/logs:/home/configurator/data/logs`
+  depends:
+    wait-for:
+      runnables:
+        - monk-jitsu/redis
+      timeout: 30
+
+jitsu-server:
+  inherits: ./jitsu-common
+  defines: runnable
+  containers:
+    server:
+      image: jitsucom/server
+      ports:
+        - <- `0.0.0.0:8002:8001`
+      paths:
+        - <- `${volume_local}/configurator/data/logs:/home/configurator/data/logs`
+  depends:
+    wait-for:
+      runnables:
+        - monk-jitsu/redis
+      timeout: 30
+
+redis:
+  defines: runnable
+  containers:
+    redis:     
+      image: redis
+
+
+redis-user-recognition:
+  defines: runnable
+  containers:
+    redis:     
+      image: redis

@@ -1,0 +1,21 @@
+namespace: monk-jitsu
+
+stack:
+  defines: process-group
+  runnable-list:
+    - monk-jitsu/redis
+    - monk-jitsu/redis-user-recognition
+    - monk-jitsu/jitsu-configurator
+    - monk-jitsu/jitsu-server
+
+  variables:
+    jitsu_admin_token: 
+      type: string
+      value: monk
+    jitsu_config_port: 
+      type: string
+      value: 8002
+    jitsu_server_port:
+      type: string
+      value: 8001
+  
