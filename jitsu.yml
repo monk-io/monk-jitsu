@@ -1,4 +1,4 @@
-namespace: monk-jitsu
+namespace: jitsu
 
 jitsu-common:
   metadata:
@@ -10,16 +10,16 @@ jitsu-common:
     icon: https://jitsu.com/img/jitsu-responsive.svg
   connections:
     jitsu-configurator:
-      runnable: monk-jitsu/jitsu-configurator
+      runnable: jitsu/jitsu-configurator
       service: jitsu-configurator
     jitsu-server:
-      runnable: monk-jitsu/jitsu-server
+      runnable: jitsu/jitsu-server
       service: jitsu-server
     jitsu-redis:
-      runnable: monk-jitsu/redis
+      runnable: jitsu/redis
       service: redis
     jitsu-redis-user-recognition:
-      runnable: monk-jitsu/redis-user-recognition
+      runnable: jitsu/redis-user-recognition
       service: redis
   variables:
     redis_host:
@@ -84,7 +84,7 @@ jitsu-configurator:
   depends:
     wait-for:
       runnables:
-        - monk-jitsu/redis
+        - jitsu/redis
       timeout: 30
   services:
     jitsu-configurator:
@@ -106,7 +106,7 @@ jitsu-server:
   depends:
     wait-for:
       runnables:
-        - monk-jitsu/redis
+        - jitsu/redis
       timeout: 30
   services:
     jitsu-server:

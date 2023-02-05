@@ -1,12 +1,12 @@
-namespace: monk-jitsu
+namespace: jitsu
 
 stack:
   defines: process-group
   runnable-list:
-    - monk-jitsu/redis
-    - monk-jitsu/redis-user-recognition
-    - monk-jitsu/jitsu-configurator
-    - monk-jitsu/jitsu-server
+    - jitsu/redis
+    - jitsu/redis-user-recognition
+    - jitsu/jitsu-configurator
+    - jitsu/jitsu-server
 
   variables:
     jitsu_admin_token: 

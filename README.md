@@ -21,35 +21,35 @@ not connected to cluster
 ## Clone Repository
 
 ```bash
-git clone https://github.com/monk-io/monk-jitsu
+git clone https://github.com/monk-io/jitsu
 ```
 
 ## Load Template
 
 ```bash
-cd monk-jitsu
+cd jitsu
 monk load MANIFEST
 ```
 
 #### Let's take a look at the themes I have installed
 
 ```bash
-foo@bar:~$ monk list monk-jitsu
+foo@bar:~$ monk list jitsu
 ✔ Got the list
 Type      Template                           Repository  Version  Tags
-runnable  monk-jitsu/jitsu-configurator      local       -        -
-runnable  monk-jitsu/jitsu-server            local       -        -
-runnable  monk-jitsu/redis                   local       -        -
-runnable  monk-jitsu/redis-user-recognition  local       -        -
-group     monk-jitsu/stack                   local       -        -
+runnable  jitsu/jitsu-configurator      local       -        -
+runnable  jitsu/jitsu-server            local       -        -
+runnable  jitsu/redis                   local       -        -
+runnable  jitsu/redis-user-recognition  local       -        -
+group     jitsu/stack                   local       -        -
 ```
 
 ## Deploy Stack
 
 ```bash
-foo@bar:~$ monk run monk-jitsu/stack
-? Select tag to run [local/monk-jitsu/stack] on: monk
-✔ Starting the job: local/monk-jitsu/stack... DONE
+foo@bar:~$ monk run jitsu/stack
+? Select tag to run [local/jitsu/stack] on: monk
+✔ Starting the job: local/jitsu/stack... DONE
 ✔ Preparing nodes DONE
 ✔ Checking/pulling images...
 ✔ [================================================] 100% redis:latest monk
@@ -59,31 +59,31 @@ foo@bar:~$ monk run monk-jitsu/stack
 ✔ Starting containers DONE
 ✔ Starting containers DONE
 ✔ Starting containers DONE
-✔ Started local/monk-jitsu/stack
+✔ Started local/jitsu/stack
 
-🔩 templates/local/monk-jitsu/stack
+🔩 templates/local/jitsu/stack
  └─🧊 Peer monk
-    ├─🔩 templates/local/monk-jitsu/redis-user-recognition
+    ├─🔩 templates/local/jitsu/redis-user-recognition
     │  └─📦 9640ac28397a62b0408cc064f981efc5-u-redis-user-recognition-redis
     │     └─🧩 redis:latest
-    ├─🔩 templates/local/monk-jitsu/jitsu-server
-    │  └─📦 5ebdbb89000d404b86873f97eed41d3c-monk-jitsu-jitsu-server-server
+    ├─🔩 templates/local/jitsu/jitsu-server
+    │  └─📦 5ebdbb89000d404b86873f97eed41d3c-jitsu-jitsu-server-server
     │     ├─🧩 jitsucom/server:latest
     │     ├─💾 /var/lib/monkd/volumes/jitsu/configurator/data/logs -> /home/configurator/data/logs
     │     └─🔌 open <ip>:8002 (0.0.0.0:8002) -> 8001
-    ├─🔩 templates/local/monk-jitsu/redis
-    │  └─📦 0de28c9c597b0cf18f1a972fd949208c-local-monk-jitsu-redis-redis
+    ├─🔩 templates/local/jitsu/redis
+    │  └─📦 0de28c9c597b0cf18f1a972fd949208c-local-jitsu-redis-redis
     │     └─🧩 redis:latest
-    └─🔩 templates/local/monk-jitsu/jitsu-configurator
+    └─🔩 templates/local/jitsu/jitsu-configurator
        └─📦 dbe97fc975e68d2f837d5bea6c162b3d-itsu-configurator-configurator
           ├─🧩 jitsucom/configurator:latest
           ├─💾 /var/lib/monkd/volumes/jitsu/configurator/data/logs -> /home/configurator/data/logs
           └─🔌 open <ip>:8001 (0.0.0.0:8001) -> 7000
 
 💡 You can inspect and manage your above stack with these commands:
- monk logs (-f) local/monk-jitsu/stack - Inspect logs
- monk shell     local/monk-jitsu/stack - Connect to the container's shell
- monk do        local/monk-jitsu/stack/action_name - Run defined action (if exists)
+ monk logs (-f) local/jitsu/stack - Inspect logs
+ monk shell     local/jitsu/stack - Connect to the container's shell
+ monk do        local/jitsu/stack/action_name - Run defined action (if exists)
 💡 Check monk help for more!
 ```
 
@@ -104,5 +104,5 @@ The variables are in `stack.yml` file. You can quickly setup by editing the valu
 ## Stop, remove and clean up workloads and templates
 
 ```bash
-monk purge monk-jitsu
+monk purge jitsu
 ```
