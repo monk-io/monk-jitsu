@@ -1,21 +1,40 @@
+---
 namespace: jitsu
 
 stack:
   defines: process-group
+  metadata:
+    name: Jitsu
+    description: |
+      Jitsu is an open-source project that provides a platform for deploying and managing serverless applications. It is designed to simplify the process of deploying and managing serverless applications by providing a unified interface for managing multiple cloud providers. Jitsu supports a wide range of cloud providers, including AWS, Google Cloud, and Microsoft Azure.
+
+      The Jitsu platform provides a number of features that make it easy to deploy and manage serverless applications. These include:
+
+      1. A unified interface for managing multiple cloud providers
+      2. Automatic scaling of resources based on application demand
+      3. Support for multiple programming languages, including Node.js, Python, and Java
+      4. Built-in monitoring and logging capabilities
+      5. Integration with popular development tools, such as Git and GitHub
+
+      Jitsu is built using open-source technologies, including Node.js, Docker, and Kubernetes. It is licensed under the Apache 2.0 license, which allows for free use and modification of the software.
+
+      Overall, Jitsu is a powerful platform for deploying and managing serverless applications. Its open-source nature and support for multiple cloud providers make it a popular choice for developers looking to simplify their serverless deployments.
+
+    website: https://jitsu.com/
+    publisher: monk.io
+    icon: https://jitsu.com/img/jitsu-responsive.svg
   runnable-list:
     - jitsu/redis
     - jitsu/redis-user-recognition
     - jitsu/jitsu-configurator
     - jitsu/jitsu-server
-
   variables:
-    jitsu_admin_token: 
+    jitsu_admin_token:
       type: string
       value: monk
-    jitsu_config_port: 
+    jitsu_config_port:
       type: string
       value: 8002
     jitsu_server_port:
       type: string
       value: 8001
-  

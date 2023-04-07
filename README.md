@@ -9,7 +9,7 @@ This repository contains Monk.io template to deploy Jitsu & Monk either locally 
 - [Add Cloud Provider](https://docs.monk.io/docs/cloud-provider)
 - [Add Instance](https://docs.monk.io/docs/multi-cloud)
 
-#### Make sure monkd is running
+## Make sure monkd is running
 
 ```bash
 foo@bar:~$ monk status
@@ -31,7 +31,7 @@ cd jitsu
 monk load MANIFEST
 ```
 
-#### Let's take a look at the themes I have installed
+## Let's take a look at the themes I have installed
 
 ```bash
 foo@bar:~$ monk list jitsu
@@ -95,8 +95,8 @@ foo@bar:~$ monk run jitsu/stack
 
 The variables are in `stack.yml` file. You can quickly setup by editing the values here.
 
-| Variable            | Description              | Default |
-| ------------------- | ------------------------ | ------- |
+| Variable          | Description              | Default |
+| ----------------- | ------------------------ | ------- |
 | jitsu_admin_token | Jitsu admin token        | monk    |
 | jitsu_config_port | Jitsu configuration port | 8002    |
 | jitsu_server_port | Jitsu server port        | 8001    |

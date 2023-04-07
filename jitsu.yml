@@ -1,13 +1,28 @@
+---
 namespace: jitsu
 
 jitsu-common:
   metadata:
-    defines: metadata
     name: Jitsu
-    description: Jitsu is an open-source data integration platform. Our mission is to ensure that all your business data is consolidated in a single database and ready for analytics.
+    description: |
+      Jitsu is an open-source project that provides a platform for deploying and managing serverless applications. It is designed to simplify the process of deploying and managing serverless applications by providing a unified interface for managing multiple cloud providers. Jitsu supports a wide range of cloud providers, including AWS, Google Cloud, and Microsoft Azure.
+
+      The Jitsu platform provides a number of features that make it easy to deploy and manage serverless applications. These include:
+
+      1. A unified interface for managing multiple cloud providers
+      2. Automatic scaling of resources based on application demand
+      3. Support for multiple programming languages, including Node.js, Python, and Java
+      4. Built-in monitoring and logging capabilities
+      5. Integration with popular development tools, such as Git and GitHub
+
+      Jitsu is built using open-source technologies, including Node.js, Docker, and Kubernetes. It is licensed under the Apache 2.0 license, which allows for free use and modification of the software.
+
+      Overall, Jitsu is a powerful platform for deploying and managing serverless applications. Its open-source nature and support for multiple cloud providers make it a popular choice for developers looking to simplify their serverless deployments.
+
     website: https://jitsu.com/
     publisher: monk.io
     icon: https://jitsu.com/img/jitsu-responsive.svg
+    private: true
   connections:
     jitsu-configurator:
       runnable: jitsu/jitsu-configurator
@@ -70,9 +85,8 @@ jitsu-common:
       type: string
       value: <- `${monk-volume-path}/jitsu`
 
-
 jitsu-configurator:
-  inherits: ./jitsu-common
+  inherits: jitsu/jitsu-common
   defines: runnable
   containers:
     configurator:
@@ -94,7 +108,7 @@ jitsu-configurator:
       host-port: <- `${jitsu_config_port}`
 
 jitsu-server:
-  inherits: ./jitsu-common
+  inherits: jitsu/jitsu-common
   defines: runnable
   containers:
     server:
@@ -117,8 +131,16 @@ jitsu-server:
 
 redis:
   defines: runnable
+  metadata:
+    name: Redis
+    description: Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
+    website: https://redis.io
+    publisher: monk.io
+    icon: https://cdn.icon-icons.com/icons2/2415/PNG/512/redis_original_wordmark_logo_icon_146369.png
+    private: true
+    version: 1.0
   containers:
-    redis:     
+    redis:
       image: redis
   services:
     redis:
@@ -126,11 +148,18 @@ redis:
       port: 6379
       protocol: tcp
 
-
 redis-user-recognition:
   defines: runnable
+  metadata:
+    name: Redis
+    description: Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
+    website: https://redis.io
+    publisher: monk.io
+    icon: https://cdn.icon-icons.com/icons2/2415/PNG/512/redis_original_wordmark_logo_icon_146369.png
+    private: true
+    version: 1.0
   containers:
-    redis:     
+    redis:
       image: redis
   services:
     redis:
