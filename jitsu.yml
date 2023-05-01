@@ -91,8 +91,6 @@ jitsu-configurator:
   containers:
     configurator:
       image: jitsucom/configurator
-      ports:
-        - <- `0.0.0.0:${jitsu_config_port}:7000`
       paths:
         - <- `${volume_local}/configurator/data/logs:/home/configurator/data/logs`
   depends:
@@ -113,8 +111,6 @@ jitsu-server:
   containers:
     server:
       image: jitsucom/server
-      ports:
-        - <- `0.0.0.0:${jitsu_server_port}:8001`
       paths:
         - <- `${volume_local}/configurator/data/logs:/home/configurator/data/logs`
   depends:
