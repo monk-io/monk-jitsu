@@ -72,7 +72,7 @@ jitsu-common:
     jitsu_cluster_token:
       env: CLUSTER_ADMIN_TOKEN
       type: string
-      value: <- `${jitsu_admin_token}`
+      value: monk
     jitsu_server_url:
       env: JITSU_SERVER_URL
       type: string
@@ -101,9 +101,8 @@ jitsu-configurator:
   services:
     jitsu-configurator:
       container: configurator
-      port: <- `${jitsu_config_port}`
+      port: 8082
       protocol: tcp
-      host-port: <- `${jitsu_config_port}`
 
 jitsu-server:
   inherits: jitsu/jitsu-common
@@ -121,9 +120,9 @@ jitsu-server:
   services:
     jitsu-server:
       container: server
-      port: <- `${jitsu_server_port}`
+      port: 8001
       protocol: tcp
-      host-port: <- `${jitsu_server_port}`
+      host-port: 8001
 
 redis:
   defines: runnable
