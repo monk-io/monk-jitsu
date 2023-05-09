@@ -80,7 +80,7 @@ jitsu-common:
     jitsu_configuration_url:
       env: JITSU_CONFIGURATOR_URL
       type: string
-      value: <- "http://" connection-hostname("jitsu-redis-user-recognition") ":" connection-port("jitsu-redis-user-recognition") concat-all
+      value: <- "http://" connection-hostname("jitsu-configurator") ":" connection-port("jitsu-configurator") concat-all
     volume_local:
       type: string
       value: <- `${monk-volume-path}/jitsu`
@@ -101,7 +101,7 @@ jitsu-configurator:
   services:
     jitsu-configurator:
       container: configurator
-      port: 8082
+      port: 7000
       protocol: tcp
 
 jitsu-server:
@@ -137,6 +137,8 @@ redis:
   containers:
     redis:
       image: redis
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
   services:
     redis:
       container: redis
@@ -156,6 +158,8 @@ redis-user-recognition:
   containers:
     redis:
       image: redis
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
   services:
     redis:
       container: redis
